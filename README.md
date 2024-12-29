@@ -1,1 +1,2 @@
 # Todo_list
+I'm excited to share that I've successfully built a Todo List App, achieving my objective of understanding DOM. This interactive app enables users to add new tasks, mark tasks as completed, and delete tasks. The tasks are displayed dynamically using the forEach(), ensuring a seamless user experience. Taking it a step further, I also implemented local storage to persist tasks even after refreshing the browser, providing a more realistic and user-friendly experience
