@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <form>
+            <input type="text"  id="taskInput">
+            <button id="b" onclick="addtask()">Add Task</button>
+        </form>
+        <ul id="taskList"></ul>
+
+        <script lang="javascript">
+            const addLocal = (todo) => {
+                let todos = getLocal();
+                todos.push(todo);
+                localStorage.setItem("todo1", JSON.stringify(todos));
+            };
+
+            const getLocal = () => {
+                let todos = localStorage.getItem("todo1");
+                return todos ? JSON.parse(todos) : [];
+            };
+
+            const display = () => {
+                let todolist = getLocal();
+                const taskList = document.getElementById("taskList");
+                taskList.innerHTML = "";
+
+                todolist.forEach(taskText => {
+                    const li = document.createElement("li");
+
+                    
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.onchange = function () {
+                        toggle(checkbox, li);
+                    };
+
+                   
+                    li.appendChild(checkbox);
+                    li.appendChild(document.createTextNode(taskText));
+
+                    
+                    taskList.appendChild(li);
+                });
+
+                function toggle(checkbox, li) {
+                    if (checkbox.checked) {
+                        li.style.textDecoration = "line-through";
+                    } else {
+                        li.style.textDecoration = "none";
+                    }
+                }
+            };
+
+            function addtask() {
+                let taskInput = document.getElementById("taskInput");
+                let taskText = taskInput.value.trim();
+
+                if (taskText === "" || taskText === "Add Task") {
+                    alert("Please enter a task.");
+                    return;
+                }
+
+                addLocal(taskText);
+                display();
+                taskInput.value = "";
+            }
+
+            window.onload = display;
+        </script>
+    </body>
+</html>
